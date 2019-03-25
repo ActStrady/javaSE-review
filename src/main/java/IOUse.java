@@ -9,6 +9,9 @@ import java.io.*;
  * @create: 2019-03-21 09:45
  **/
 public class IOUse {
+
+    public static final String INPUT_PATH = "src/main/java/Basic.java";
+
     /**
      * 字节输入流
      * 按字节读取文件
@@ -17,7 +20,7 @@ public class IOUse {
     @Test
     public void byteRead() {
         // jdk1.7 开始在try后的括号里的内容可以自己close
-        try (InputStream inputStream = new FileInputStream("src/main/java/Basic.java")) {
+        try (InputStream inputStream = new FileInputStream(INPUT_PATH)) {
             int oneByte = inputStream.read();
             while (oneByte != -1) {
                 System.out.print((char) oneByte);
@@ -35,7 +38,7 @@ public class IOUse {
      */
     @Test
     public void charRead() {
-        try (Reader reader = new FileReader("src/main/java/Basic.java")) {
+        try (Reader reader = new FileReader(INPUT_PATH)) {
             int oneChar = reader.read();
             while (oneChar != -1) {
                 System.out.print((char) oneChar);
@@ -52,7 +55,7 @@ public class IOUse {
      */
     @Test
     public void byteWrite() {
-        try (InputStream inputStream = new FileInputStream("src/main/java/Basic.java");
+        try (InputStream inputStream = new FileInputStream(INPUT_PATH);
              OutputStream outputStream = new FileOutputStream("src/main/resources/byte.txt")) {
             int read = inputStream.read();
             while (read != -1) {
@@ -75,5 +78,22 @@ public class IOUse {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void buffInput() {
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(INPUT_PATH))){
+            int read = bufferedInputStream.read();
+            while (read != -1) {
+                System.out.print((char) read);
+                read = bufferedInputStream.read();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void buffOut() {
+
     }
 }
