@@ -82,7 +82,7 @@ public class IOUse {
 
     @Test
     public void buffInput() {
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(INPUT_PATH))){
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(INPUT_PATH))) {
             int read = bufferedInputStream.read();
             while (read != -1) {
                 System.out.print((char) read);

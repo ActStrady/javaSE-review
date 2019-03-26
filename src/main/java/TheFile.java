@@ -62,12 +62,13 @@ public class TheFile {
 
         // 复制几个文件
         copy("src/main/java/Basic.java", file.getPath() + "/Basic.java");
-        copy("E:\\OneDrive\\Photos\\书桌.jpg", file.getPath()+ "/书桌.jpg");
+        copy("E:\\OneDrive\\Photos\\书桌.jpg", file.getPath() + "/书桌.jpg");
         copy("D:/wangqiang/wangqiang.txt", file.getPath() + "/wangqiang.txt");
     }
 
     /**
      * 复制文件
+     *
      * @param path 文件路径
      * @throws IOException io异常
      */

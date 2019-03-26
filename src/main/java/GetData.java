@@ -1,9 +1,7 @@
 import org.junit.Test;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.WeakHashMap;
 
 /**
  * @program: javaSE_review
@@ -15,6 +13,7 @@ public class GetData {
 
     public static final String DOUBAN_MOV = "https://movie.douban.com/explore#!type=movie&tag=%E7%83%AD%E9%97%A8&sort" +
             "=recommend&page_limit=20&page_start=0";
+
     @Test
     public void getDouBanMovImage() {
         try {

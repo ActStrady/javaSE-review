@@ -13,7 +13,7 @@ public class CompareRandom {
     /**
      * 数学类的随机方法和Random类的随机方法的比较
      * 结论：Math其实是调用了Random类的nextDouble方法
-     *      其实效率和分布两个差别并不大
+     * 其实效率和分布两个差别并不大
      */
     private static void compare() {
         int ranNum;
@@ -24,7 +24,7 @@ public class CompareRandom {
         long start1 = System.currentTimeMillis();
         for (int i = 0; i < COUNT; i++) {
             // Math.random生成0-1的数包含0不含1
-            ranNum = (int)(Math.random() * 20) + 1;
+            ranNum = (int) (Math.random() * 20) + 1;
             showCount = randoms.get(ranNum);
             // 三目运算符，给Hashtable 键对应的值初始化和统计分布
             randoms.put(ranNum, showCount != null ? showCount + 1 : 0);
@@ -50,6 +50,7 @@ public class CompareRandom {
             System.out.println(integer + "-->" + randoms.get(integer));
         }
     }
+
     public static void main(String[] args) {
         compare();
     }
