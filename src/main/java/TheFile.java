@@ -53,6 +53,8 @@ public class TheFile {
         // 列出所有文件
         File files = new File("src/main/java");
         File[] files1 = files.listFiles();
+        // 断言
+        assert files1 != null;
         for (File file2 : files1) {
             String path = file2.getPath();
             if (path.contains(".java")) {

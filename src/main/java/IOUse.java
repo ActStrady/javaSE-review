@@ -9,8 +9,7 @@ import java.io.*;
  * @create: 2019-03-21 09:45
  **/
 public class IOUse {
-
-    public static final String INPUT_PATH = "src/main/java/Basic.java";
+    private static final String INPUT_PATH = "src/main/java/Basic.java";
 
     /**
      * 字节输入流
@@ -80,9 +79,13 @@ public class IOUse {
         }
     }
 
+    /**
+     * 缓冲区的字节流输入
+     */
     @Test
     public void buffInput() {
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(INPUT_PATH))) {
+        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(
+                new FileInputStream(INPUT_PATH))) {
             int read = bufferedInputStream.read();
             while (read != -1) {
                 System.out.print((char) read);
@@ -93,7 +96,86 @@ public class IOUse {
         }
     }
 
+    /**
+     * 缓存区字节流输出, 加上true参数表示追加模式
+     */
+    @Test
     public void buffOut() {
+        try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+                new FileOutputStream("src/main/resources/char.txt", true))) {
+            bufferedOutputStream.write("你好".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * BufferedReader和BufferWriter
+     */
+    @Test
+    public void bufferedReadWrit() {
+        BufferedReader bufferedReader = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(INPUT_PATH));
+            bufferedWriter = new BufferedWriter(new FileWriter("src/main/resources/char.txt"));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                bufferedWriter.write(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                assert bufferedReader != null;
+                bufferedReader.close();
+                assert bufferedWriter != null;
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * randomAccessFile
+     * 基本取代 DataInputStream 和 DataOutputStream
+     */
+    @Test
+    public void randomAF() {
+        // rw 读写模式
+        try (RandomAccessFile randomAccessFile = new RandomAccessFile("raf", "rw")) {
+            for (int i = 0; i < 10; i++) {
+                // 写入
+                randomAccessFile.writeDouble(i * 0.5);
+                // 指针位置
+                System.out.println(randomAccessFile.getFilePointer());
+            }
+            // 设置指针位置
+            randomAccessFile.seek(72);
+            // 读取
+            System.out.println(randomAccessFile.readDouble());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * DataInputStream 和 DataOutputStream
+     */
+    @Test
+    public void dataInOut() {
+        try (
+                DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("io"));
+                DataInputStream dataInputStream = new DataInputStream(new FileInputStream("io"))
+        ) {
+            for (int i = 0; i < 10; i++) {
+                dataOutputStream.writeDouble(i * 0.5);
+            }
+            dataInputStream.skipBytes(72);
+            System.out.println(dataInputStream.readDouble());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
